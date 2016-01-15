@@ -65,3 +65,21 @@ coreseek-4.y.z测试：
     对应配置：etc/csft_rtindex_cjk.conf
     PHP程序：api/test_coreseek_rtindex.php
 	在线说明：http://www.coreseek.cn/products-install/rt-indexes/
+
+
+
+wget http://www.coreseek.cn/uploads/csft/4.0/coreseek-4.1-beta.tar.gz
+tar xzvf coreseek-4.1-beta.tar.gz
+cd coreseek-4.1-beta
+##安装mmseg
+cd mmseg-3.2.14
+./bootstrap #输出的warning信息可以忽略，如果出现error则需要解决
+./configure --prefix=/usr/local/mmseg3
+make && make install
+cd ..
+##安装coreseek
+cd csft-4.1
+sh buildconf.sh #输出的warning信息可以忽略，如果出现error则需要解决
+./configure --prefix=/usr/local/coreseek --without-unixodbc --with-mmseg --with-mmseg-includes=/usr/local/mmseg3/include/mmseg/ --with-mmseg-libs=/usr/local/mmseg3/lib/ --with-mysql
+make && make install
+cd ..
